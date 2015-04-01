@@ -1,41 +1,71 @@
 $(window).ready(function() {
 
-    var currentSlide = 0;
-    var allSlides = $('.slide');
+    var intervalTime = 5000;
+    var currentPosition = 0;
+    var slideWidth = parseFloat($('#slidesContainer').css('width'));
+    var slides = $('.slide');
+    var numberOfSlides = slides.length;
+    var autoInterval;
+    $('#slidesContainer').css('overflow', 'hidden');
 
-    $('#slides-wrapper').width(allSlides.length * window.outerWidth);
+    slides
+        .wrapAll('<div id="slideInner"></div>')
+        .css({
+            'float' : 'left',
+            'width' : slideWidth
+        });
 
-    setFramePosition(currentSlide);
+    $('#slideInner').css('width', slideWidth * numberOfSlides);
+    $('#slideshow')
+        .prepend('<span class="control" id="leftControl">Move left</span>')
+        .append('<span class="control" id="rightControl">Move right</span>');
 
-    $('.nextSlide').click(function(){
-        currentSlide += 1;
+    manageControls(currentPosition);
 
-        if(currentSlide >= allSlides){
-            currentSlide = 0;
+    autoInterval = setInterval(onInterval, intervalTime);
+
+    $('.control')
+        .on('click', function(){
+            clearInterval(autoInterval);
+
+            currentPosition = ($(this).attr('id') == 'rightControl')
+                ? currentPosition + 1 : currentPosition - 1;
+
+            manageControls(currentPosition);
+
+            $('#slideInner').animate({
+                'marginLeft' : slideWidth * (-currentPosition)
+            });
+
+            autoInterval = setInterval(onInterval, intervalTime);
+        });
+
+    function manageControls(position){
+        if(position == 0){
+            $('#leftControl').hide()
+        } else{
+            $('#leftControl').show()
         }
 
-        setFramePosition(currentSlide);
-    });
+        if(position == numberOfSlides - 1){
+            $('#rightControl').hide()
+        } else{
+            $('#rightControl').show()
+        }
+    }
 
-    $('.previousSlide').click(function(){
-        currentSlide -= 1;
+    function onInterval(){
+        currentPosition += 1;
 
-        if(currentSlide < 0){
-            currentSlide = allSlides.length - 1;
+        if(currentPosition == numberOfSlides){
+            currentPosition = 0;
         }
 
-        setFramePosition(currentSlide);
-    });
+        manageControls(currentPosition);
 
+        $('#slideInner').animate({
+            'marginLeft' : slideWidth * (-currentPosition)
+        });
+    }
 });
 
-//calculate the slideshow frame position and animate it to the new position
-function setFramePosition(pos){
-
-    //calculate position
-    var px = window.outerWidth * pos * - 1;
-    //set ul left position
-    $('#slideshow .slide').animate({
-        left: px
-    }, 300);
-}
