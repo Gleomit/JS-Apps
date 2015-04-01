@@ -1,0 +1,7 @@
+main{
+    margin: 0 auto;
+}
+
+main>section, form{
+    display: inline-block;
+}

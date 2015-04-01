@@ -1,0 +1,12 @@
+main{
+    margin: 0 auto;
+}
+
+table, tr, td{
+    border: 1px solid #000;
+}
+
+thead>tr>td{
+    background-color: #AEB95D;
+    padding: 0 40px;
+}
