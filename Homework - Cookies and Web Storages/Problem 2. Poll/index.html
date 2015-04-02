@@ -6,9 +6,35 @@
 </head>
 <body>
     <main>
+        <section id="question">
+            <h1 id="theQuestion"></h1>
 
+            <form id="questionForm">
+                <section>
+                    <input type="radio" name="answer"/>
+                    <label for="answer1" id="answer1"></label>
+                </section>
+                <section>
+                    <input type="radio" name="answer"/>
+                    <label for="answer2" id="answer2"></label>
+                </section>
+                <section>
+                    <input type="radio" name="answer"/>
+                    <label for="answer3" id="answer3"></label>
+                </section>
+                <section>
+                    <input type="radio" name="answer"/>
+                    <label for="answer4" id="answer4"></label>
+                </section>
+                <button type="button" id="previous">Previous</button>
+                <button type="button" id="next">Next</button>
+                <button type="button" id="submitButton">Submit</button>
+            </form>
+            <span id="timeShow"></span>
+        </section>
     </main>
     <script src="js/libs/jquery-2.1.3.min.js"></script>
+    <script src="js/scripts/Question.js"></script>
     <script src="js/pollSystem.js"></script>
 </body>
 </html>
