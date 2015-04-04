@@ -7,38 +7,39 @@ $(document).ready(function(){
             i,
             currentAnswer;
 
-        //clearLocalStorageVariables();
-
         localStorage.isCompleted = localStorage.isCompleted || 'false';
         localStorage.firstTime = localStorage.firstTime || 'true';
         localStorage.atQuestion = localStorage.atQuestion || '0';
         localStorage.questions = localStorage.questions || JSON.stringify([]);
-        localStorage.timerLeft = localStorage.timerLeft || '30000';
+        localStorage.timerLeft = localStorage.timerLeft || '300';
 
         questions = JSON.parse(localStorage.questions);
         currentQuestion = parseInt(localStorage.atQuestion);
         currentTimerLeft = parseInt(localStorage.timerLeft);
 
         if(localStorage.isCompleted === 'true'){
-
+            $('#questionForm').append('<button id="resetQuiz">Restart</button>');
         } else {
+            $('#questionForm').append('<button id="submitButton">Submit</button>');
+
             interval = setInterval(function(){
                 currentTimerLeft -= 1;
 
                 if(currentTimerLeft <= 0) {
-                    localStorage.isCompleted = 'true';
-                    currentTimerLeft = 0;
                     clearInterval(interval);
+                    currentTimerLeft = 0;
+
+                    localStorage.isCompleted = 'true';
+                    localStorage.questions = JSON.stringify(questions);
+                    localStorage.timerLeft = currentTimerLeft;
                 }
-            }, 1);
+            }, 1000);
 
             if(localStorage.firstTime === 'true'){
                 localStorage.questions = JSON.stringify(loadSampleQuestions());
                 questions = JSON.parse(localStorage.questions);
                 localStorage.firstTime = 'false';
             }
-
-            console.log(questions);
 
             $('#theQuestion').text(questions[currentQuestion].question);
 
@@ -83,6 +84,15 @@ $(document).ready(function(){
                     onQuestionChange();
                 }
             });
+
+            $('#submitButton').on('click', function(){
+                checkForSelectedAnswer();
+
+                localStorage.atQuestion = currentQuestion;
+                localStorage.questions = JSON.stringify(questions);
+                localStorage.timerLeft = currentTimerLeft;
+                localStorage.isCompleted = 'true';
+            });
         }
 
         $('main').append('<button id="clearLocalStorage" form="questionForm">Clear Local Storage</button>');
@@ -114,8 +124,6 @@ $(document).ready(function(){
                     selectedAnswer = i;
                     break;
                 }
-                //console.log(iterator.next());
-                ///iterator.next();
             }
 
             if(selectedAnswer > -1){
@@ -126,20 +134,21 @@ $(document).ready(function(){
 
         function onQuestionChange(){
             if(currentQuestion <= questions.length - 1 && currentQuestion >= 0){
+                var answerFields = $('#questionForm').find('.answer');
+
                 $('#question').fadeToggle();
 
                 setTimeout(function(){
-                    $('input[type=radio]').attr('checked', false);
+                    answerFields.attr('checked', false);
 
                     $('#theQuestion').text(questions[currentQuestion].question);
 
-                    for(i = 1; i <= 4; i += 1){
-                        currentAnswer = $('#answer' + i.toString());
-                        currentAnswer.text(questions[currentQuestion].possibleAnswers[i - 1]);
+                    for(i = 0; i < 4; i += 1){
+                        $(answerFields[i]).next().text(questions[currentQuestion].possibleAnswers[i]);
                     }
 
                     if(questions[currentQuestion].isAnswered == true){
-                        $('#answer' + (questions[currentQuestion].possibleAnswers.indexOf(questions[currentQuestion].choosenAnswer) - 1).toString()).attr('checked', true);
+                        answerFields[questions[currentQuestion].possibleAnswers.indexOf(questions[currentQuestion].choosenAnswer)].checked = true;
                     }
                 }, 300);
 
