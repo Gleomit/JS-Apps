@@ -5,7 +5,6 @@ var Question = (function(){
         this.choosenAnswer = "";
         this.possibleAnswers = answersArray;
         this.rightAnswer = this.possibleAnswers[theRightAnswer];
-
     }
 
     return Question;
