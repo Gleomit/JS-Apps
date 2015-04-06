@@ -4,8 +4,13 @@ $(document).ready(function(){
             currentQuestion,
             currentTimerLeft,
             interval,
-            i,
-            currentAnswer;
+            i;
+
+        var questionForm,
+            answerInputs;
+
+        questionForm = $('#questionForm');
+        answerInputs = $('#questionForm').find('.answer');
 
         localStorage.isCompleted = localStorage.isCompleted || 'false';
         localStorage.firstTime = localStorage.firstTime || 'true';
@@ -18,9 +23,9 @@ $(document).ready(function(){
         currentTimerLeft = parseInt(localStorage.timerLeft);
 
         if(localStorage.isCompleted === 'true'){
-            $('#questionForm').append('<button id="resetQuiz">Restart</button>');
+            questionForm.append('<button id="resetQuiz">Restart</button>');
         } else {
-            $('#questionForm').append('<button id="submitButton">Submit</button>');
+            questionForm.append('<button id="submitButton">Submit</button>');
 
             interval = setInterval(function(){
                 currentTimerLeft -= 1;
@@ -33,6 +38,8 @@ $(document).ready(function(){
                     localStorage.questions = JSON.stringify(questions);
                     localStorage.timerLeft = currentTimerLeft;
                 }
+
+                $('#timeShow').text(Math.floor(currentTimerLeft / 60) + ':' + ((currentTimerLeft - Math.floor(currentTimerLeft / 60)) % 59 + 1));
             }, 1000);
 
             if(localStorage.firstTime === 'true'){
@@ -41,18 +48,7 @@ $(document).ready(function(){
                 localStorage.firstTime = 'false';
             }
 
-            $('#theQuestion').text(questions[currentQuestion].question);
-
-            for(i = 1; i <= 4; i += 1){
-                currentAnswer = $('#answer' + i.toString());
-                currentAnswer.text(questions[currentQuestion].possibleAnswers[i - 1]);
-
-                if(questions[currentQuestion].isAnswered == true){
-                    if(i == questions[currentQuestion].possibleAnswers.indexOf(questions[currentQuestion].choosenAnswer) + 1){
-                        $(currentAnswer).attr('checked', 'true');
-                    }
-                }
-            }
+            updateHTMLElements();
 
             $(window).on('unload', function(){
                 localStorage.atQuestion = currentQuestion;
@@ -115,12 +111,9 @@ $(document).ready(function(){
 
         function checkForSelectedAnswer() {
             var selectedAnswer = -1;
-            var answerFields = $('#questionForm').find('.answer');
-
-            console.log(answerFields);
 
             for(i = 0; i < 4; i += 1){
-                if(answerFields[i].checked == true){
+                if(answerInputs[i].checked == true){
                     selectedAnswer = i;
                     break;
                 }
@@ -134,25 +127,28 @@ $(document).ready(function(){
 
         function onQuestionChange(){
             if(currentQuestion <= questions.length - 1 && currentQuestion >= 0){
-                var answerFields = $('#questionForm').find('.answer');
 
                 $('#question').fadeToggle();
 
                 setTimeout(function(){
-                    answerFields.attr('checked', false);
-
-                    $('#theQuestion').text(questions[currentQuestion].question);
-
-                    for(i = 0; i < 4; i += 1){
-                        $(answerFields[i]).next().text(questions[currentQuestion].possibleAnswers[i]);
-                    }
-
-                    if(questions[currentQuestion].isAnswered == true){
-                        answerFields[questions[currentQuestion].possibleAnswers.indexOf(questions[currentQuestion].choosenAnswer)].checked = true;
-                    }
+                    updateHTMLElements();
                 }, 300);
 
                 $('#question').fadeToggle();
+            }
+        }
+
+        function updateHTMLElements(){
+            answerInputs.attr('checked', false);
+
+            $('#theQuestion').text(questions[currentQuestion].question);
+
+            for(i = 0; i < 4; i += 1){
+                $(answerInputs[i]).next().text(questions[currentQuestion].possibleAnswers[i]);
+            }
+
+            if(questions[currentQuestion].isAnswered == true){
+                answerInputs[questions[currentQuestion].possibleAnswers.indexOf(questions[currentQuestion].choosenAnswer)].checked = true;
             }
         }
 
