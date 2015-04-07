@@ -39,3 +39,17 @@ body{
 #slideshow #slidesContainer, #slideshow #slidesContainer .slide, #rightControl, #leftControl{
     top: 160px;
 }
+
+h1{
+    color: deepskyblue;
+    margin: 0;
+    position: relative;
+}
+
+#slideshow #slidesContainer .slide *{
+    position: absolute;
+}
+
+#slideshow #slidesContainer .slide img{
+    z-index: -1;
+}

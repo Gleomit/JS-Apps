@@ -3,6 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Poll</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <main>
@@ -10,26 +11,26 @@
             <h1 id="theQuestion"></h1>
 
             <form id="questionForm">
-                <section>
-                    <input type="radio" class="answer" name="answer"/>
-                    <label for="answer1" id="answer1"></label>
+                <section id="answer1" class="answer">
+                    <input type="radio" name="answer"/>
+                    <label></label>
                 </section>
-                <section>
-                    <input type="radio" class="answer" name="answer"/>
-                    <label for="answer2" id="answer2"></label>
+                <section id="answer2" class="answer">
+                    <input type="radio" name="answer"/>
+                    <label></label>
                 </section>
-                <section>
-                    <input type="radio" class="answer" name="answer"/>
-                    <label for="answer3" id="answer3"></label>
+                <section id="answer3" class="answer">
+                    <input type="radio" name="answer"/>
+                    <label></label>
                 </section>
-                <section>
-                    <input type="radio" class="answer" name="answer"/>
-                    <label for="answer4" id="answer4"></label>
+                <section id="answer4" class="answer">
+                    <input type="radio" name="answer"/>
+                    <label></label>
                 </section>
                 <button type="button" id="previous">Previous</button>
                 <button type="button" id="next">Next</button>
             </form>
-            <span id="timeShow"></span>
+            <h1 id="timeShow"></h1>
         </section>
     </main>
     <script src="js/libs/jquery-2.1.3.min.js"></script>

@@ -1,18 +1,43 @@
-main{
-    width: 680px;
+#question{
+    width: 570px;
     margin: 0 auto;
     border: 1px solid #000;
-    text-align: center;
-}
-
-.question{
-
 }
 
 .answer{
-
+    margin-bottom: 10px;
+    margin-left: 15px;
 }
 
-#clearLocalStorage{
+#next, #previous{
+    margin-top: 20px;
+    width: 70px;
+    height: 30px;
+    vertical-align: top;
+}
 
+#next{
+    margin-left: 74.5%;
+}
+
+#theQuestion{
+    margin-top: 0;
+}
+
+#answerStatus, #timeShow{
+    text-align: center;
+}
+
+#timeShow{
+    margin-bottom: 0;
+}
+
+#resetQuiz, #submitButton{
+    width: 70px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.center{
+    text-align: center;
 }
