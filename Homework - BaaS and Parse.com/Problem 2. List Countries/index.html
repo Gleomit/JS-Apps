@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>BaaS and Parse.com</title>
+      <link rel="stylesheet" href="css/style.css"/>
+
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="js/libs/handlebars.js"></script>
     <script src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
@@ -13,8 +15,10 @@
       </div>
       
 <!--      Template for countries-->
-        <div class="country" id="countryTemplate">
+    <script id="countryTemplate" type="text/x-handlebars-template">
+        <div class="country">
             <h2>{{town.country.name}} - {{town.name}}</h2>
         </div>
+    </script>
   </body>
 </html>
