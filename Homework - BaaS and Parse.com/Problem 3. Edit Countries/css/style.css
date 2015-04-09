@@ -1,6 +1,18 @@
+.country:hover{
+    cursor: pointer;
+}
+
+h1{
+    margin: 5px 0;
+}
+
 #Countries{
     text-align: center;
     width: 600px;
     margin: 0 auto;
     background-color: #CDC1C5;
+}
+
+.hide{
+    display: none;
 }

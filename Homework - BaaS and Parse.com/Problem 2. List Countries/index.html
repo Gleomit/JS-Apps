@@ -17,7 +17,9 @@
 <!--      Template for countries-->
     <script id="countryTemplate" type="text/x-handlebars-template">
         <div class="country">
-            <h2>{{town.country.name}} - {{town.name}}</h2>
+            {{#each countries}}
+                <h1>{{this.objectId}}</h1>
+            {{/each}}
         </div>
     </script>
   </body>
