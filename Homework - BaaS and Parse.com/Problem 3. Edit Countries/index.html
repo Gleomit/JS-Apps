@@ -10,24 +10,22 @@
     <script src="js/pageJS.js"></script>
   </head>
   <body>
-      <div id="Countries">
-          <button id="addCountry">Add Country</button>
+      <main>
+          <input type="text" id="countryField"/>
+          <button id="addCountry" class="button green" type="button">Add Country</button>
           <section class="hide" id="countrySection">
-              <input type="text" id="countryField"/>
+
           </section>
-      </div>
+      </main>
       
 <!--      Template for countries-->
     <script id="countryTemplate" type="text/x-handlebars-template">
-        <div class="country">
-            {{#each countries}}
-                <h1 class="country">{{this.objectId}}</h1>
-                <button class="delete" data-country-id="{{this.objectId}}">Delete</button>
-                <button class="edit">Edit</button>
-                <section id="{{this.objectId}}">
-                    <input type="text" data-country-id="{{this.objectId}}"/>
-                </section>
-            {{/each}}
+        <div class="country" data-id="{{objectId}}">
+            <h1>{{name}}</h1>
+            <section>
+                <button type="button" class="button red countryDelete">Delete</button>
+                <button type="button" class="button blue countryEdit">Edit</button>
+            </section>
         </div>
     </script>
   </body>

@@ -1,25 +1,17 @@
 $(document).ready(function(){
-    Parse.initialize('MCYs6zTfyozcYVTr9EB3kHFT3TtftYSwhiwrjoqf', 'kQVxLosZatryKT5kYX05kAe1haoLS17iaSGrPzfl');
+    var template = Handlebars.compile($('#countryTemplate').html());
 
-    var Country = Parse.Object.extend('Country');
-    var Town = Parse.Object.extend('Town');
-
-    var source   = $("#countryTemplate").html();
-    var template = Handlebars.compile(source);
-
-    //var query = (new Parse.Query(Country));
-
-    (new Parse.Query(Country)).find({
+    $.ajax({
+        url: 'https://api.parse.com/1/classes/Country/',
+        headers: {
+            'X-Parse-Application-Id' : 'MCYs6zTfyozcYVTr9EB3kHFT3TtftYSwhiwrjoqf',
+            'X-Parse-REST-API-Key' : 'V8BcCj4Kgg0dGdr6il03rI4T7yojvOvSoSsiTT4Z'
+        },
+        type: 'GET',
         success: function(result){
-            var list = [];
-
-            result.forEach(function(country){
-                list.push({name: country.get('name'), objectId: country.id});
+            result.results.forEach(function (current) {
+               $('main').append(template({country: current.name}));
             });
-
-            var context = {countries: list};
-            var html    = template(context);
-            $('#Countries').append(html);
         }
     });
 });

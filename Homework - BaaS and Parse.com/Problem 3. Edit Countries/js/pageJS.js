@@ -1,37 +1,50 @@
 $(document).ready(function(){
+    var template = Handlebars.compile($('#countryTemplate').html());
+    var baseUrl = 'https://api.parse.com/1/classes/';
 
     $('#addCountry').on('click', function(){
-        $('#countrySection').toggleClass('hide');
-    });
-
-    Parse.initialize('MCYs6zTfyozcYVTr9EB3kHFT3TtftYSwhiwrjoqf', 'kQVxLosZatryKT5kYX05kAe1haoLS17iaSGrPzfl');
-
-    var Country = Parse.Object.extend('Country');
-    var Town = Parse.Object.extend('Town');
-
-    var countries = [];
-
-    var source   = $("#countryTemplate").html();
-    var template = Handlebars.compile(source);
-
-    var query = new Parse.Query(Country);
-
-    query.find({
-        success: function(result){
-            var list = [];
-
-            result.forEach(function(country){
-                list.push({name: country.get('name'), objectId: country.id});
+        //$('#countrySection').toggleClass('hide');
+        if($('#countryField').val().trim().length == 0){
+            alert('You need to enter a country');
+        } else{
+            makeRequest('POST', baseUrl + 'Country/', {name: $('#countryField').val()}, function(result){
+                $('main').append(template({name: $('#countryField').val(), objectId: result.objectId}));
+                $('.countryDelete').last().on('click', deleteMe);
             });
-
-            var context = {countries: list};
-            var html    = template(context);
-            $('#Countries').append(html);
         }
     });
 
-    console.log($('#Countries').find('div'));
-    //$('#Countries').find('div').forEach(function(country){
-    //    alert(country);
-    //});
+    makeRequest('GET', baseUrl + 'Country/', null, function(result){
+        result.results.forEach(function (current) {
+            $('main').append(template({name: current.name, objectId: current.objectId}));
+        });
+
+        $('.countryDelete').on('click', deleteMe);
+    }, null);
+
+    function deleteMe(event){
+        makeRequest('DELETE', baseUrl + 'Country/' + $(event.target.parentNode.parentNode).attr('data-id'), null,
+            function(result){
+                $(event.target.parentNode.parentNode).remove();
+            }, null);
+    }
+
+    function addCountry(){
+
+    }
+
+    function makeRequest(method, url, data, success, error){
+        $.ajax({
+            method: method,
+            headers:{
+                'X-Parse-Application-Id' : 'MCYs6zTfyozcYVTr9EB3kHFT3TtftYSwhiwrjoqf',
+                'X-Parse-REST-API-Key' : 'V8BcCj4Kgg0dGdr6il03rI4T7yojvOvSoSsiTT4Z'
+            },
+            url: url,
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: success,
+            error: error
+        });
+    }
 });
