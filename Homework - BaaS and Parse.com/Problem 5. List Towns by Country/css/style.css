@@ -9,6 +9,11 @@
     text-align: left;
 }
 
+.town{
+    margin-top: 10px;
+    border: 1px solid #000;
+}
+
 .country section{
     text-align: right;
     width: 60%;
@@ -21,6 +26,12 @@
 .country section, .country h1{
     display: inline-block;
     vertical-align: top;
+}
+
+.country .townsSection{
+    text-align: center;
+    display:inline-block;
+    width: 100%;
 }
 
 .country h1{
@@ -39,7 +50,7 @@ main{
     display: none;
 }
 
-#countryField, .editCountry{
+#countryField, .editCountry, .editTown{
     padding: 7px 0;
 }
 
@@ -87,4 +98,8 @@ main{
 .button.blue:hover {
     background: none repeat scroll 0 0 #444444;
     color: #FFFFFF;
+}
+
+.townAdd{
+    width: 100px;
 }

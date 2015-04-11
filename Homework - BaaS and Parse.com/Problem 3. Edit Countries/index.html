@@ -21,10 +21,11 @@
 <!--      Template for countries-->
     <script id="countryTemplate" type="text/x-handlebars-template">
         <div class="country" data-id="{{objectId}}">
-            <h1>{{name}}</h1>
+            <h1 data-id="{{objectId}}">{{name}}</h1>
             <section>
-                <button type="button" class="button red countryDelete">Delete</button>
+                <input type="text" class="editCountry"/>
                 <button type="button" class="button blue countryEdit">Edit</button>
+                <button type="button" class="button red countryDelete">Delete</button>
             </section>
         </div>
     </script>

@@ -2,8 +2,40 @@
 <html>
   <head>
     <title>BaaS and Parse.com</title>
+      <link rel="stylesheet" href="css/style.css"/>
+
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="js/libs/handlebars.js"></script>
+    <script src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
+    <script src="js/pageJS.js"></script>
   </head>
   <body>
-      
+      <main>
+          <input type="text" id="countryField"/>
+          <button id="addCountry" class="button green" type="button">Add Country</button>
+          <section class="hide" id="countrySection">
+
+          </section>
+      </main>
+
+    <script id="countryTemplate" type="text/x-handlebars-template">
+        <div class="country" data-id="{{objectId}}">
+            <h1>{{name}}</h1>
+            <section>
+                <input type="text" class="editCountry"/>
+                <button type="button" class="button blue countryEdit">Edit</button>
+                <button type="button" class="button green showTowns">Towns</button>
+                <button type="button" class="button red countryDelete">Delete</button>
+            </section>
+            <section class="townsSection">
+            </section>
+        </div>
+    </script>
+
+    <script id="townTemplate" type="text/x-handlebars-template">
+      <div class="town" data-id="{{objectId}}">
+          <h1>{{name}}</h1>
+      </div>
+    </script>
   </body>
 </html>
