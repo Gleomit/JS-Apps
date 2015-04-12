@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>List All Books</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+</head>
+<body>
+    <form action="POST">
+        <h1>Add Book Form</h1>
+        <section>
+            <label for="bookTitle">Book title: </label>
+            <input type="text" id="bookTitle"/>
+        </section>
+        <section>
+            <label for="bookAuthor">Book author: </label>
+            <input type="text" id="bookAuthor"/>
+        </section>
+        <section>
+            <button type="button" id="addBook" class="button blue">Add Book</button>
+        </section>
+    </form>
+
+    <main>
+
+    </main>
+
+    <form action="PUT" id="editForm">
+        <h1>Edit Book Form</h1>
+        <section>
+            <label for="editBookTitle">Book title: </label>
+            <input type="text" id="editBookTitle"/>
+        </section>
+        <section>
+            <label for="editBookAuthor">Book author: </label>
+            <input type="text" id="editBookAuthor"/>
+        </section>
+        <section>
+            <label for="editBookISBN">ISBN: </label>
+            <input type="text" id="editBookISBN"/>
+        </section>
+        <section>
+            <button type="button" id="saveBook" class="button blue">Save</button>
+        </section>
+    </form>
+
+    <script type="text/javascript" src="js/editABook.js"></script>
+</body>
+</html>
