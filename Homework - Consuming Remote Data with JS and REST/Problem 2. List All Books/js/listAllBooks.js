@@ -11,7 +11,7 @@ $(document).ready(function(){
                 + '<h3>ISBN: ' + currentBook.isbn + '</h3>'
                 + '</section></div>';
 
-            main.append(htmlToAppend);
+            main.prepend(htmlToAppend);
         });
 
         main.find('.showInfo').on('click', showInfo);

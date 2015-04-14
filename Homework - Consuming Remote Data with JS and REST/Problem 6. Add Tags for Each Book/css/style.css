@@ -10,6 +10,10 @@ form:first-child, main, #editForm{
     display: inline-block;
 }
 
+h3{
+    text-align: center;
+}
+
 h1, h2{
     margin: 0;
 }
@@ -27,6 +31,13 @@ h1, h2{
     background-color: #fff;
 }
 
+#addTags input{
+    height: 29px;
+}
+
+form>h1{
+    text-align: center;
+}
 form{
     width: 320px;
     padding: 5px;
@@ -44,7 +55,7 @@ form label{
     font-weight: bold;
 }
 
-input{
+form>section>input{
     float: right;
     vertical-align: middle;
 }
@@ -79,6 +90,30 @@ input{
     color: #FFFFFF;
 }
 
-#addBook, #saveBook{
+.button.green {
+    background: none repeat scroll 0 0 #46b98a;
+    color: #FFFFFF;
+}
+
+.button.red {
+    background: none repeat scroll 0 0 #E0645C;
+    color: #FFFFFF;
+}
+.button.red:hover {
+    background: none repeat scroll 0 0 #999999;
+    color: #FFFFFF;
+}
+
+.button.green:hover {
+    background: none repeat scroll 0 0 #444444;
+    color: #FFFFFF;
+}
+
+#addBook, #saveBook, #addTag, #editTag{
     width: 100%;
+}
+
+.deleteTag{
+    margin-left: 20px;
+    width: 100px;
 }

@@ -17,8 +17,6 @@ $(document).ready(function(){
 
     $('#addBook').on('click', addBook);
     $('#saveBook').on('click', saveBook);
-    //$('#editForm').css('display', 'none');
-    //$('#editForm').css('position', 'absolute');
 
     function addBook(){
         var bookTitle = $('#bookTitle').val().trim();
@@ -57,10 +55,6 @@ $(document).ready(function(){
             $('#editBookAuthor').val(result.author);
             $('#editBookISBN').val(result.isbn);
         }, null);
-        //$('#editForm').css('display', 'inline');
-        //$('#editForm').css('position', 'absolute');
-        //$('#editForm').css('top', $(event.target).css('top'));
-        //$('#editForm').css('left', (main.css('left') + main.css('width')));
     }
 
     function deleteBook(event){
@@ -72,46 +66,50 @@ $(document).ready(function(){
     }
 
     function saveBook(){
-        var bookTitle = $('#editBookTitle').val().trim();
-        var bookAuthor = $('#editBookAuthor').val().trim();
-        var bookISBN = $('#editBookISBN').val().trim();
-        var selectedBook = $('#editForm').attr('data-id');
-
-        if(bookTitle.length == 0 || bookAuthor.length == 0 || bookISBN.length == 0){
-            alert('One of the fields is empty');
-
-            var theBook = $(".book[data-id=" + selectedBook + "]");
-            $('#editBookTitle').val(theBook.find('h1').text());
-            $('#editBookAuthor').val(theBook.find('h3').first().text().substring(8));
-            $('#editBookISBN').val(theBook.find('h3').last().text().substring(6));
+        if($('#editForm').attr('data-id') == undefined){
+            alert('You must select a book first.');
         } else{
-            makeRequest('PUT', baseUrl + 'Book/' + selectedBook,
-                {
-                    title: bookTitle,
-                    author: bookAuthor,
-                    isbn: bookISBN
-                }, function(result){
-                    var theBook = $(".book[data-id=" + selectedBook + "]");
+            var bookTitle = $('#editBookTitle').val().trim();
+            var bookAuthor = $('#editBookAuthor').val().trim();
+            var bookISBN = $('#editBookISBN').val().trim();
+            var selectedBook = $('#editForm').attr('data-id');
 
-                    theBook.find('h1').text(bookTitle);
-                    theBook.find('h3').first().text('Author: ' + bookAuthor);
-                    theBook.find('h3').last().text('ISBN: ' + bookISBN);
+            if(bookTitle.length == 0 || bookAuthor.length == 0 || bookISBN.length == 0){
+                alert('One of the fields is empty');
 
-                    $('#editForm').removeAttr('data-id');
+                var theBook = $(".book[data-id=" + selectedBook + "]");
+                $('#editBookTitle').val(theBook.find('h2').first().text());
+                $('#editBookAuthor').val(theBook.find('h2').first().next().text().substring(8));
+                $('#editBookISBN').val(theBook.find('h2').last().text().substring(6));
+            } else{
+                makeRequest('PUT', baseUrl + 'Book/' + selectedBook,
+                    {
+                        title: bookTitle,
+                        author: bookAuthor,
+                        isbn: bookISBN
+                    }, function(result){
+                        var theBook = $(".book[data-id=" + selectedBook + "]");
 
-                    $('#editBookTitle').val('');
-                    $('#editBookAuthor').val('');
-                    $('#editBookISBN').val('');
-                }, null);
+                        theBook.find('h2').first().text('Title: ' + bookTitle);
+                        theBook.find('h2').first().next().text('Author: ' + bookAuthor);
+                        theBook.find('h2').last().text('ISBN: ' + bookISBN);
+
+                        $('#editForm').removeAttr('data-id');
+
+                        $('#editBookTitle').val('');
+                        $('#editBookAuthor').val('');
+                        $('#editBookISBN').val('');
+                    }, null);
+            }
         }
     }
 
     function getBookHTML(objectId, title, author, isbn){
-        var htmlToAppend = '<div class="book" data-id="' + objectId + '" tabindex="' + tabIndex + '"><section><h1 class="showInfo">'
-            + title + '</h1>'
-            + '<h3>Author: ' + author + '</h3>'
-            + '<h3>ISBN: ' + isbn + '</h3></section>'
-            + '<section><button type="button" class="button red deleteBook">Delete</button></section>'
+        var htmlToAppend = '<div class="book" data-id="' + objectId + '" tabindex="' + tabIndex + '"><section><h2 class="showInfo">Title: '
+            + title + '</h2>'
+            + '<h2>Author: ' + author + '</h2>'
+            + '<h2>ISBN: ' + isbn + '</h2></section>'
+            + '<section><button type="button" class="button deleteBook">Delete</button></section>'
             + '</div>';
 
         tabIndex++;

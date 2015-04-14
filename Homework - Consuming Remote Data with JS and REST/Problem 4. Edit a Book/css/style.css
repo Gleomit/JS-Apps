@@ -1,12 +1,8 @@
 main{
-    width: 700px;
+    width: 600px;
     margin-left: 360px;
     background-color: #ccc;
     padding: 10px;
-}
-
-body{
-    position: relative;
 }
 
 form:first-child, main, #editForm{
@@ -15,7 +11,7 @@ form:first-child, main, #editForm{
 }
 
 #editForm{
-    left: 1120px;
+    left: 1020px;
 }
 
 form>h1{
@@ -23,19 +19,8 @@ form>h1{
     text-align: center;
 }
 
-h1, h3{
+h1, h2{
     margin: 0;
-    text-align: left;
-    display: inline-block;
-    vertical-align: top;
-}
-
-h1{
-    width: 250px;
-}
-
-.book h3:last-child{
-    float: right;
 }
 
 .book{
