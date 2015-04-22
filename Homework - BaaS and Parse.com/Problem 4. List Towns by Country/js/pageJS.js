@@ -30,9 +30,9 @@ $(document).ready(function(){
     }, null);
 
     function deleteCountry(event){
-        makeRequest('DELETE', baseUrl + 'Country/' + $(event.target.parentNode.parentNode).attr('data-id'), null,
+        makeRequest('DELETE', baseUrl + 'Country/' + $(event.target).parents('.country').last().attr('data-id'), null,
             function(result){
-                $(event.target.parentNode.parentNode).remove();
+              $(event.target).parents('.country').last().remove();
             }, null);
     }
 
@@ -60,7 +60,7 @@ $(document).ready(function(){
         if($(event.target).prev().val().trim().length == 0){
             alert('You cannot set empty string for country');
         } else{
-            makeRequest('PUT', baseUrl + 'Country/' + $(event.target.parentNode.parentNode).attr('data-id'),
+            makeRequest('PUT', baseUrl + 'Country/' + $(event.target).parents('.country').last().attr('data-id'),
                 {name : $(event.target).prev().val()}, function(result){
                     $(event.target.parentNode).prev().text($(event.target).prev().val());
                     $(event.target).prev().val('');

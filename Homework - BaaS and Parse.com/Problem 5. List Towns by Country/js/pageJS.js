@@ -33,7 +33,7 @@ $(document).ready(function(){
     }, null);
 
     function deleteCountry(event){
-        makeRequest('DELETE', baseUrl + 'Country/' + $(event.target.parentNode.parentNode).attr('data-id'), null,
+        makeRequest('DELETE', baseUrl + 'Country/' + $(event.target).parents('.country').last().attr('data-id'), null,
             function(result){
                 $(event.target.parentNode.parentNode).remove();
             }, null);
@@ -64,7 +64,7 @@ $(document).ready(function(){
         if($(event.target).prev().val().trim().length == 0){
             alert('You cannot set empty string for country');
         } else{
-            makeRequest('PUT', baseUrl + 'Country/' + $(event.target.parentNode.parentNode).attr('data-id'),
+            makeRequest('PUT', baseUrl + 'Country/' + $(event.target).parents('.country').last().attr('data-id'),
                 {name : $(event.target).prev().val()}, function(result){
                     $(event.target.parentNode).prev().text($(event.target).prev().val());
                     $(event.target).prev().val('');
@@ -82,11 +82,11 @@ $(document).ready(function(){
                     country: {
                         __type : 'Pointer',
                         className: 'Country',
-                        objectId : $(event.target.parentNode.parentNode).attr('data-id')
+                        objectId : $(event.target).parents('.country').last().attr('data-id')
                     }
 
                 }, function(result){
-                makeRequest('PUT', baseUrl + 'Country/' + $(event.target.parentNode.parentNode).attr('data-id'),
+                makeRequest('PUT', baseUrl + 'Country/' + $(event.target).parents('.country').last().attr('data-id'),
                     {
                         towns : {
                             __op: "AddRelation",
@@ -114,7 +114,7 @@ $(document).ready(function(){
         if($(event.target).prev().val().trim().length == 0){
             alert('You cannot set empty string for town');
         } else{
-            makeRequest('PUT', baseUrl + 'Town/' + $(event.target.parentNode.parentNode).attr('data-id'),
+            makeRequest('PUT', baseUrl + 'Town/' + $(event.target).parents('.town').last().attr('data-id'),
                 {name : $(event.target).prev().val()}, function(result){
                     $(event.target.parentNode).prev().text($(event.target).prev().val());
                     $(event.target).prev().val('');
@@ -123,9 +123,9 @@ $(document).ready(function(){
     }
 
     function deleteTown(event){
-        makeRequest('DELETE', baseUrl + 'Town/' + $(event.target.parentNode.parentNode).attr('data-id'), null,
+        makeRequest('DELETE', baseUrl + 'Town/' + $(event.target).parents('.town').last().attr('data-id'), null,
             function(result){
-                $(event.target.parentNode.parentNode).remove();
+              $(event.target).parents('.town').last().remove();
             }, null);
     }
 

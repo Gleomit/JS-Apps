@@ -9,14 +9,14 @@ $(document).ready(function(){
             $('main').append(template({name: current.name, objectId: current.objectId}));
         });
 
-        $('.countryDelete').on('click', deleteMe);
-        $('.countryEdit').on('click', changeMe);
+        $('.countryDelete').on('click', deleteCountry);
+        $('.countryEdit').on('click', editCountry);
     }, null);
 
-    function deleteMe(event){
-        makeRequest('DELETE', baseUrl + 'Country/' + $(event.target.parentNode.parentNode).attr('data-id'), null,
+    function deleteCountry(event){
+        makeRequest('DELETE', baseUrl + 'Country/' + $(event.target).parents('.country').last().attr('data-id'), null,
             function(result){
-                $(event.target.parentNode.parentNode).remove();
+              $(event.target).parents('.country').last().remove();
             }, null);
     }
 
@@ -26,17 +26,17 @@ $(document).ready(function(){
         } else{
             makeRequest('POST', baseUrl + 'Country/', {name: $('#countryField').val()}, function(result){
                 $('main').append(template({name: $('#countryField').val(), objectId: result.objectId}));
-                $('.countryDelete').last().on('click', deleteMe);
-                $('.countryEdit').last().on('click', changeMe);
+                $('.countryDelete').last().on('click', deleteCountry);
+                $('.countryEdit').last().on('click', editCountry);
             });
         }
     }
 
-    function changeMe(event){
+    function editCountry(event){
         if($(event.target).prev().val().trim().length == 0){
             alert('You cannot set empty string for country');
         } else{
-            makeRequest('PUT', baseUrl + 'Country/' + $(event.target.parentNode.parentNode).attr('data-id'),
+            makeRequest('PUT', baseUrl + 'Country/' + $(event.target).parents('.country').last().attr('data-id'),
                 {name : $(event.target).prev().val()}, function(result){
                     $(event.target.parentNode).prev().text($(event.target).prev().val());
                     $(event.target).prev().val('');

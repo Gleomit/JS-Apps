@@ -1,0 +1,19 @@
+table{
+	border-collapse: collapse;
+}
+
+td{
+	border: 1px solid #000;
+}
+
+thead td{
+	background-color: #ccc;
+}
+
+tbody tr:nth-child(even) td{
+	background-color: #fff;
+}
+
+tbody tr:nth-child(odd) td{
+	background-color: #ddd;
+}

@@ -148,14 +148,17 @@ $(document).ready(function(){
     }
 
     $('#addTag').on('click', function () {
-       $('#addTags').append('<section><input type="text" /><button type="button" class="button red deleteTag">Remove</button></section>');
-        $('#addTags').find('button').last().on('click', deleteTagField);
+        createTagHtml('#addTags');
     });
 
     $('#editTag').on('click', function () {
-        $('#editTags').append('<section><input type="text" /><button type="button" class="button red deleteTag">Remove</button></section>');
-        $('#editTags').find('button').last().on('click', deleteTagField);
+            createTagHtml('#editTags');
     });
+
+    function createTagHtml(parent){
+        $(parent).append('<section><input type="text" /><button type="button" class="button red deleteTag">Remove</button></section>');
+        $(parent).find('button').last().on('click', deleteTagField);
+    }
 
     function deleteTagField(event){
         $(event.target.parentNode).remove();

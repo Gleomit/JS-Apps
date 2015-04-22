@@ -1,0 +1,119 @@
+main{
+    width: 600px;
+    margin-left: 360px;
+    background-color: #ccc;
+    padding: 10px;
+}
+
+form:first-child, main, #editForm{
+    vertical-align: top;
+    display: inline-block;
+}
+
+h3{
+    text-align: center;
+}
+
+h1, h2{
+    margin: 0;
+}
+
+.book{
+    margin-top: 10px;
+    border: 1px solid #000;
+}
+
+.book:hover{
+    cursor: pointer;
+}
+
+.book:focus{
+    background-color: #fff;
+}
+
+#addTags input{
+    height: 29px;
+}
+
+form>h1{
+    text-align: center;
+}
+form{
+    width: 320px;
+    padding: 5px;
+    border: 3px solid #eee;
+    border-radius: 3px;
+    position: fixed;
+}
+
+#editForm{
+    left: 1020px;
+}
+
+form label{
+    font-size: 150%;
+    font-weight: bold;
+}
+
+form>section>input{
+    float: right;
+    vertical-align: middle;
+}
+
+.button {
+    border: 0 none;
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Arial,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    padding: 7px 10px;
+    text-transform: none;
+    transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -webkit-transition: all 0.3s ease 0s;
+    width: 16.795%;
+    text-align: center;
+}
+
+.button.blue {
+    background: none repeat scroll 0 0 #2DB6CF;
+    color: #FFFFFF;
+}
+.button.blue:hover {
+    background: none repeat scroll 0 0 #444444;
+    color: #FFFFFF;
+}
+
+.button.green {
+    background: none repeat scroll 0 0 #46b98a;
+    color: #FFFFFF;
+}
+
+.button.red {
+    background: none repeat scroll 0 0 #E0645C;
+    color: #FFFFFF;
+}
+.button.red:hover {
+    background: none repeat scroll 0 0 #999999;
+    color: #FFFFFF;
+}
+
+.button.green:hover {
+    background: none repeat scroll 0 0 #444444;
+    color: #FFFFFF;
+}
+
+#addBook, #saveBook, #addTag, #editTag{
+    width: 100%;
+}
+
+.deleteTag{
+    margin-left: 20px;
+    width: 100px;
+}
